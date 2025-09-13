@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const { connectDB } = require("./src/config/db");
-const userRoutes = require("./src/routes/users/auth.routes");
-const carServiceRoutes = require("./src/routes/carService.routes");
+const authRoutes = require("./src/routes/auth.routes");
+const userRoutes = require("./src/routes/users/index");
 
 const app = express();
 const port = 4000;
@@ -15,9 +15,9 @@ app.get("/", (req, res) => {
     res.send("Hello server!");
 });
 
-app.use("/services", carServiceRoutes);
+app.use("/auth", authRoutes);
 
-app.use("/auth", userRoutes);
+app.use("/user", userRoutes);
 
 app.listen(port, () => {
     console.log(`server is running on http://localhost:${port}`);
